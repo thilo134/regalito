@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0b0d12;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+}
+
+/* Cuadrícula ajustada para que las tarjetas sean rectangulares verticales */
+.grid-container {
+    display: grid;
+    width: 100%;
+    max-width: 1300px;
+    height: 95vh;
+    gap: 12px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr); /* Filas más altas para dar forma rectangular */
+    grid-template-areas:
+        "top1 top2 top3 top4 top5 top6"
+        "left1 center center center center right1"
+        "left2 center center center center right2"
+        "bot1 bot2 bot3 bot4 bot5 bot6";
+}
+
+/* Estilo de las tarjetas (rectangulares y verticales) */
+.card {
+    border: 2px solid #0099ff;
+    border-radius: 12px;
+    background-color: #12151c;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 153, 255, 0.2);
+}
+
+/* Forzar a que la imagen llene el rectángulo sin deformarse */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Esto recorta la foto proporcionalmente para que encaje perfecto en el rectángulo */
+}
+
+/* Posiciones de la cuadrícula */
+.t1 { grid-area: top1; } .t2 { grid-area: top2; } .t3 { grid-area: top3; }
+.t4 { grid-area: top4; } .t5 { grid-area: top5; } .t6 { grid-area: top6; }
+
+.r1 { grid-area: right1; } .r2 { grid-area: right2; }
+
+.b6 { grid-area: bot6; } .b5 { grid-area: bot5; } .b4 { grid-area: bot4; }
+.b3 { grid-area: bot3; } .b2 { grid-area: bot2; } .b1 { grid-area: bot1; }
+
+.l2 { grid-area: left2; } .l1 { grid-area: left1; }
+
+.centro {
+    grid-area: center;
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en columna (uno debajo del otro) */
+    justify-content: center; /* Los centra verticalmente */
+    align-items: center;     /* Los centra horizontalmente */
+    gap: 20px;               /* Espacio de separación entre el texto y el botón */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilo para el texto de arriba */
+.texto-superior {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgba(0, 153, 255, 0.4);
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo para el texto de abajo */
+.texto-inferior {
+    color: #b4befe;
+    font-size: 20px;
+    font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0, 153, 255, 0.3);
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo del botón de Tan Biónica */
+.btn-tanbionica {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+    border: none;
+    padding: 18px 36px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 114, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.btn-tanbionica:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 114, 255, 0.8);
+}
+
+/* ========================================== */
+/* DISEÑO PARA CELULARES (Pantallas pequeñas) */
+/* ========================================== */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        padding: 15px;
+    }
+
+    /* Cambiamos la estructura a una cuadrícula de 2 o 3 columnas para que los rectángulos entren bien */
+    .grid-container {
+        display: grid;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        gap: 10px;
+        /* Reorganizamos las celdas automáticamente para celulares */
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: none; /* Desactivamos el mapa grande de escritorio */
+    }
+
+    /* Hacemos que todas las tarjetas fluyan de manera uniforme */
+    .card {
+        grid-area: auto !important;
+        aspect-ratio: 3 / 4; /* Mantienen su forma rectangular vertical */
+        width: 100%;
+    }
+
+    /* Ubicamos el botón de forma destacada arriba o abajo en el celular */
+    .centro {
+        grid-column: span 2; /* Ocupa todo el ancho de la pantalla del celular */
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-tanbionica {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+    }
+}
